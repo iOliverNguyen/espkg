@@ -1,7 +1,10 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import {log} from '../pkg/logger'
 
 export default function Home() {
+  log.log('sample log')
+
   return (
     <div className={styles.container}>
       <Head>
