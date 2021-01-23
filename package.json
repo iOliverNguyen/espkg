@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "snowpack build",
-    "dev": "snowpack dev",
+    "sp-dev": "snowpack dev",
     "start": "http-server build -p 3000",
     "validate": "svelte-check"
   },
@@ -24,7 +24,7 @@
     "svelte-check": "^1.0.0",
     "svelte-preprocess": "^4.0.0",
     "tslib": "^2.0.0",
-    "typescript": "^3.9.3"
-  },
-  "dependencies": {}
+    "typescript": "^3.9.3",
+    "vercel": "^21.1.0"
+  }
 }
