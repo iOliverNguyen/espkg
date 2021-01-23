@@ -1,12 +1,11 @@
-/** @type {import("snowpack").SnowpackUserConfig } */
+/** @type {import('snowpack').SnowpackUserConfig } */
 module.exports = {
   mount: {
-    public: {
-      url: "/",
-      static: true,
+    root: {
+      url: '/'
     },
     src: {
-      url: "/",
+      url: '/_/',
     },
   },
   plugins: [
