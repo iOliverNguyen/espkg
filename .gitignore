@@ -1,15 +1,18 @@
-.DS_Store
 *.log
-.cache/
-.idea/
-.vscode/
+.cache
+.DS_Store
+.idea
 .pnp*
-server/
-coverage/
+.snowpack
+.vercel
+.vscode
 build
+coverage/
 dist/*
 lib/
 node_modules
+out/
+server/
 
 # OS generated files
 ._*
@@ -18,5 +21,3 @@ node_modules
 .Trashes
 ehthumbs.db
 Thumbs.db
-
-.vercel

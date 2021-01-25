@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/:name",
-      "destination": "/api/:name"
+      "source": "/(.*)",
+      "destination": "/api/routes.ts"
     }
   ]
 }

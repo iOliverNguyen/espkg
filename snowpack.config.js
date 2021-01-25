@@ -10,5 +10,9 @@ module.exports = {
   },
   plugins: [
     ['@snowpack/plugin-svelte'],
-  ]
+  ],
+  packageOptions: {
+    source: "remote",
+    origin: "http://localhost:6000"
+  }
 };

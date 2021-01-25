@@ -1,8 +1,9 @@
 {
   "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
+    "outDir": "out",
     "moduleResolution": "node",
-    "target": "es2017",
+    "target": "es2018",
     /**
       Svelte Preprocess cannot figure out whether you have a value or a type, so tell TypeScript
       to enforce using `import type` instead of `import` for Types.
@@ -24,7 +25,8 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": [
-    "src/**/*"
+    "src",
+    "api"
   ],
   "exclude": [
     "node_modules/*",
