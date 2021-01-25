@@ -10,28 +10,32 @@ const assert = require('assert').strict;
   {
     input: '/react-native@^v1.2.4',
     expected: {
-      namespace: undefined, name: 'react-native', semver: '^v1.2.4',
+      namespace: undefined, name: 'react-native',
+      qualifier: 'react-native', tag: '^v1.2.4',
       filepath: undefined
     }
   },
   {
     input: '/@hello/react-native@^v1.2.4',
     expected: {
-      namespace: '@hello', name: 'react-native', semver: '^v1.2.4',
+      namespace: '@hello', name: 'react-native',
+      qualifier: '@hello/react-native', tag: '^v1.2.4',
       filepath: undefined
     }
   },
   {
     input: '/@hello/react-native@^v1.2.4-alpha?hello',
     expected: {
-      namespace: '@hello', name: 'react-native', semver: '^v1.2.4-alpha',
+      namespace: '@hello', name: 'react-native',
+      qualifier: '@hello/react-native', tag: '^v1.2.4-alpha',
       filepath: undefined
     }
   },
   {
     input: '/@hello/react-native@^v1.2.4-alpha/sample/01.js?hello',
     expected: {
-      namespace: '@hello', name: 'react-native', semver: '^v1.2.4-alpha',
+      namespace: '@hello', name: 'react-native',
+      qualifier: '@hello/react-native', tag: '^v1.2.4-alpha',
       filepath: '/sample/01.js'
     }
   },
