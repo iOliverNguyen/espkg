@@ -9,6 +9,10 @@ export const npmInstallEnvVars = [];
 export const registry = 'https://registry.npmjs.org';
 export const rootDir = findRootDir();
 
+export const responseHeadersOk = {
+  'Cache-Control': 's-maxage=5184000, stale-while-revalidate'
+};
+
 const env = process.env;
 export const tmpDir: string = env.TMP_DIR || '/tmp/windpack';
 

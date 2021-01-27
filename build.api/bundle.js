@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { exec as _exec } from 'child_process';
 import * as esinstall from 'esinstall';
-import fs from 'fs/promises';
+import fs from 'fs';
 import mkdirp from 'mkdirp';
 import path from 'path';
 import _rimraf from 'rimraf';
@@ -18,6 +18,9 @@ import { npmInstallEnvVars, rootDir, tmpDir } from './config.js';
 import { ll } from './util/logger.js';
 const exec = promisify(_exec);
 const rimraf = promisify(_rimraf);
+const fsReadFile = promisify(fs.readFile);
+const fsWriteFile = promisify(fs.writeFile);
+const fsStat = promisify(fs.stat);
 export function downloadAndConvertPackage(meta, fullname, tag, filepath) {
     return __awaiter(this, void 0, void 0, function* () {
         const thisMeta = meta.versions[tag];
@@ -56,7 +59,7 @@ export function downloadAndConvertPackage(meta, fullname, tag, filepath) {
         };
         Object.assign(mockPackageJson.dependencies, thisMeta.peerDependencies);
         mockPackageJson.dependencies[fullname] = tag;
-        yield fs.writeFile(`${outterDir}/package.json`, JSON.stringify(mockPackageJson, null, '  '));
+        yield fsWriteFile(`${outterDir}/package.json`, JSON.stringify(mockPackageJson, null, '  '));
         // install dependencies
         ll.debug(`installing dependencies...`);
         yield installDependencies(outterDir);
@@ -70,7 +73,7 @@ export function downloadAndConvertPackage(meta, fullname, tag, filepath) {
         const importMapPath = `${outterDir}/web_modules/import-map.json`;
         const importMap = yield readJsonFile(importMapPath);
         const compiledFilePath = path.resolve(webmodulePath, importMap.imports[fullname]);
-        const compiledData = (yield fs.readFile(compiledFilePath)).toString();
+        const compiledData = (yield fsReadFile(compiledFilePath)).toString();
         return {
             compiledData,
         };
@@ -78,7 +81,7 @@ export function downloadAndConvertPackage(meta, fullname, tag, filepath) {
 }
 function readJsonFile(path) {
     return __awaiter(this, void 0, void 0, function* () {
-        const data = yield fs.readFile(path);
+        const data = yield fsReadFile(path);
         return JSON.parse(data.toString());
     });
 }
@@ -86,7 +89,7 @@ function sanitizePkg(cwd) {
     return __awaiter(this, void 0, void 0, function* () {
         const pkg = yield readJsonFile(`${cwd}/package.json`);
         pkg.scripts = {};
-        return fs.writeFile(`${cwd}/package.json`, JSON.stringify(pkg, null, '  '));
+        return fsWriteFile(`${cwd}/package.json`, JSON.stringify(pkg, null, '  '));
     });
 }
 function installDependencies(cwd) {

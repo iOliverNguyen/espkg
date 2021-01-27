@@ -1,5 +1,6 @@
 import type {NowRequest, NowResponse} from '@vercel/node';
 import {downloadAndConvertPackage} from './bundle.js';
+import {responseHeadersOk} from './config.js';
 import {errorContent, sendResponse} from './httpx.js';
 import {loadMeta, resolveTag} from "./load.js";
 import {parsePath} from './parse.js';
@@ -35,7 +36,11 @@ export async function routes(req: NowRequest, res: NowResponse) {
   if (respData) return sendResponse(res, respData);
 
   const data = await downloadAndConvertPackage(meta, fullname, tag, filepath);
+
+  for (let [header, value] of Object.entries(responseHeadersOk)) {
+    res.setHeader(header, value);
+  }
   res.status(200).write(data.compiledData);
   res.end();
-  ll.info(`package: ${fullname} served`)
+  ll.info(`package: ${fullname} served`);
 }

@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { downloadAndConvertPackage } from './bundle.js';
+import { responseHeadersOk } from './config.js';
 import { errorContent, sendResponse } from './httpx.js';
 import { loadMeta, resolveTag } from "./load.js";
 import { parsePath } from './parse.js';
@@ -41,6 +42,9 @@ export function routes(req, res) {
         if (respData)
             return sendResponse(res, respData);
         const data = yield downloadAndConvertPackage(meta, fullname, tag, filepath);
+        for (let [header, value] of Object.entries(responseHeadersOk)) {
+            res.setHeader(header, value);
+        }
         res.status(200).write(data.compiledData);
         res.end();
         ll.info(`package: ${fullname} served`);

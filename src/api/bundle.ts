@@ -1,6 +1,6 @@
 import {exec as _exec} from 'child_process';
 import * as esinstall from 'esinstall';
-import fs from 'fs/promises';
+import fs from 'fs';
 import mkdirp from 'mkdirp';
 import path from 'path';
 import _rimraf from 'rimraf';
@@ -11,6 +11,9 @@ import {ll} from './util/logger.js';
 
 const exec = promisify(_exec);
 const rimraf = promisify(_rimraf);
+const fsReadFile = promisify(fs.readFile);
+const fsWriteFile = promisify(fs.writeFile);
+const fsStat = promisify(fs.stat);
 
 export async function downloadAndConvertPackage(meta: RegistryPackageMeta, fullname: string, tag: string, filepath: string): Promise<ConvertedPackage> {
   const thisMeta = meta.versions[tag];
@@ -53,7 +56,7 @@ export async function downloadAndConvertPackage(meta: RegistryPackageMeta, fulln
   Object.assign(mockPackageJson.dependencies, thisMeta.peerDependencies);
   mockPackageJson.dependencies[fullname] = tag;
 
-  await fs.writeFile(`${outterDir}/package.json`, JSON.stringify(mockPackageJson, null, '  '));
+  await fsWriteFile(`${outterDir}/package.json`, JSON.stringify(mockPackageJson, null, '  '));
 
   // install dependencies
   ll.debug(`installing dependencies...`);
@@ -71,7 +74,7 @@ export async function downloadAndConvertPackage(meta: RegistryPackageMeta, fulln
   const importMapPath = `${outterDir}/web_modules/import-map.json`;
   const importMap = await readJsonFile(importMapPath) as ImportMap;
   const compiledFilePath = path.resolve(webmodulePath, importMap.imports[fullname]);
-  const compiledData = (await fs.readFile(compiledFilePath)).toString();
+  const compiledData = (await fsReadFile(compiledFilePath)).toString();
 
   return {
     compiledData,
@@ -79,14 +82,14 @@ export async function downloadAndConvertPackage(meta: RegistryPackageMeta, fulln
 }
 
 async function readJsonFile(path: string) {
-  const data = await fs.readFile(path);
+  const data = await fsReadFile(path);
   return JSON.parse(data.toString());
 }
 
 async function sanitizePkg(cwd: string) {
   const pkg = await readJsonFile(`${cwd}/package.json`);
   pkg.scripts = {};
-  return fs.writeFile(
+  return fsWriteFile(
     `${cwd}/package.json`,
     JSON.stringify(pkg, null, '  '),
   );
