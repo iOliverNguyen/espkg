@@ -1,8 +1,9 @@
 {
-  "extends": "@tsconfig/svelte/tsconfig.json",
+//   "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
     "outDir": "out",
     "moduleResolution": "node",
+    "module": "esnext",
     "target": "es2018",
     /**
       Svelte Preprocess cannot figure out whether you have a value or a type, so tell TypeScript

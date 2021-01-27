@@ -1,11 +1,9 @@
-import * as fs from 'fs'
-import minilog from 'minilog'
+import minilog from 'minilog';
 
-import {tmpDir} from '../config'
+// export const logFilePath = `${tmpDir}/server.log`
 
-export const logFilePath = `${tmpDir}/server.log`
+minilog.enable();
 
-minilog.enable()
-minilog.pipe(fs.createWriteStream(logFilePath))
+// minilog.pipe(fs.createWriteStream(logFilePath))
 
-export const ll = minilog('log')
+export const ll = minilog('log');
