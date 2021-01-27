@@ -33,20 +33,31 @@ export async function debug(req: NowRequest, res: NowResponse) {
   rr.package = pkgJson;
   console.log('package json', JSON.stringify(pkgJson));
 
-  const dirs = fs.readdirSync(`${rootDir}/node_modules`);
+  let dirs = fs.readdirSync(`${rootDir}`);
+  for (let dir of dirs) {
+    console.log('root:', dir);
+  }
+
+  dirs = fs.readdirSync(`${rootDir}/build.api`);
   for (let dir of dirs) {
     console.log('dir:', dir);
   }
-  rr.dirs = dirs;
+  rr.lib = dirs;
 
-  const stat = fs.statSync(`${rootDir}/node_modules/yarn`);
-  console.log('isFile', stat.isFile());
-  console.log('isDirectory', stat.isDirectory());
-  console.log('isBlockDevice', stat.isBlockDevice());
-  console.log('isCharacterDevice', stat.isCharacterDevice());
-  console.log('isSymbolicLink', stat.isSymbolicLink());
-  console.log('isFIFO', stat.isFIFO());
-  console.log('isSocket', stat.isSocket());
+  // dirs = fs.readdirSync(`${rootDir}/deps/y.js`);
+  // for (let dir of dirs) {
+  //   console.log('dir:', dir);
+  // }
+  // rr.dirs = dirs;
+
+  // const stat = fs.statSync(`${rootDir}/node_modules/yarn`);
+  // console.log('isFile', stat.isFile());
+  // console.log('isDirectory', stat.isDirectory());
+  // console.log('isBlockDevice', stat.isBlockDevice());
+  // console.log('isCharacterDevice', stat.isCharacterDevice());
+  // console.log('isSymbolicLink', stat.isSymbolicLink());
+  // console.log('isFIFO', stat.isFIFO());
+  // console.log('isSocket', stat.isSocket());
 
   // let yarnDirs = fs.readdirSync(`${rootDir}/node_modules/yarn`)
   // for (let dir of yarnDirs) {

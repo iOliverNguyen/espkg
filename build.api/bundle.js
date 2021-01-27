@@ -95,7 +95,7 @@ function sanitizePkg(cwd) {
 function installDependencies(cwd) {
     return __awaiter(this, void 0, void 0, function* () {
         const envVariables = npmInstallEnvVars.join(' ');
-        const installCommand = `${envVariables} ${rootDir}/node_modules/yarn/bin/yarn.js install`;
+        const installCommand = `${envVariables} node ${rootDir}/deps/y.js install`;
         const execRes = yield exec(installCommand, { cwd });
         if (execRes.stdout)
             ll.debug(execRes.stdout);
