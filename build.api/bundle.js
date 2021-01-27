@@ -79,7 +79,7 @@ export function downloadAndConvertPackage(meta, fullname, tag, filepath) {
         };
     });
 }
-function readJsonFile(path) {
+export function readJsonFile(path) {
     return __awaiter(this, void 0, void 0, function* () {
         const data = yield fsReadFile(path);
         return JSON.parse(data.toString());
@@ -95,7 +95,7 @@ function sanitizePkg(cwd) {
 function installDependencies(cwd) {
     return __awaiter(this, void 0, void 0, function* () {
         const envVariables = npmInstallEnvVars.join(' ');
-        const installCommand = `${envVariables} ${rootDir}/node_modules/.bin/yarn install`;
+        const installCommand = `${envVariables} ${rootDir}/node_modules/yarn/bin/yarn.js install`;
         const execRes = yield exec(installCommand, { cwd });
         if (execRes.stdout)
             ll.debug(execRes.stdout);

@@ -81,7 +81,7 @@ export async function downloadAndConvertPackage(meta: RegistryPackageMeta, fulln
   };
 }
 
-async function readJsonFile(path: string) {
+export async function readJsonFile(path: string) {
   const data = await fsReadFile(path);
   return JSON.parse(data.toString());
 }
@@ -98,7 +98,7 @@ async function sanitizePkg(cwd: string) {
 
 async function installDependencies(cwd: string) {
   const envVariables = npmInstallEnvVars.join(' ');
-  const installCommand = `${envVariables} ${rootDir}/node_modules/.bin/yarn install`;
+  const installCommand = `${envVariables} ${rootDir}/node_modules/yarn/bin/yarn.js install`;
 
   const execRes = await exec(installCommand, {cwd});
   if (execRes.stdout) ll.debug(execRes.stdout);
