@@ -26,7 +26,7 @@ export function loadMeta(fullname) {
     });
 }
 export function resolveTag(meta, fullname, tag, filepath) {
-    if (!meta.versions) {
+    if (meta.name !== fullname || !meta.versions) {
         ll.error(`invalid module: ${fullname}`);
         return response(400, 'invalid module');
     }

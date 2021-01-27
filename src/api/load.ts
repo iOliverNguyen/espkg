@@ -21,7 +21,7 @@ export async function loadMeta(fullname: string): Promise<RegistryPackageMeta> {
 }
 
 export function resolveTag(meta: RegistryPackageMeta, fullname: string, tag: string, filepath: string): ResponseData | void {
-  if (!meta.versions) {
+  if (meta.name !== fullname || !meta.versions) {
     ll.error(`invalid module: ${fullname}`);
     return response(400, 'invalid module');
   }

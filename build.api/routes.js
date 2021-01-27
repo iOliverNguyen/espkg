@@ -8,11 +8,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { downloadAndConvertPackage } from './bundle.js';
-import { sendResponse } from './httpx.js';
+import { errorContent, sendResponse } from './httpx.js';
 import { loadMeta, resolveTag } from "./load.js";
 import { parsePath } from './parse.js';
 import { ll } from './util/logger.js';
 export default function (req, res) {
+    return routes(req, res).catch((err) => {
+        ll.error(`serving ${req.url}: ${errorContent(err)}`);
+        if (!res.headersSent) {
+            res.status(500).send(errorContent(err));
+        }
+    });
+}
+export function routes(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { method, url } = req;
         if (method !== 'GET') {
@@ -24,15 +32,18 @@ export default function (req, res) {
             res.status(200).send(`malform url`);
             return;
         }
-        const { namespace, shortname, fullname, tag, filepath } = pp;
+        let { fullname, tag, filepath } = pp;
+        if (!tag)
+            tag = 'latest';
         const meta = yield loadMeta(fullname);
-        ll.info(`package: ${meta.name}`);
+        ll.info(`package: ${fullname}`);
         let respData = resolveTag(meta, fullname, tag, filepath);
         if (respData)
             return sendResponse(res, respData);
         const data = yield downloadAndConvertPackage(meta, fullname, tag, filepath);
-        res.status(200).write(data);
+        res.status(200).write(data.compiledData);
         res.end();
+        ll.info(`package: ${fullname} served`);
     });
 }
 //# sourceMappingURL=routes.js.map
