@@ -1,14 +1,11 @@
-import fs from 'fs/promises';
-import mkdirp from 'mkdirp';
+import type {NowRequest, NowResponse} from '@vercel/node';
 import {downloadAndConvertPackage} from './bundle.js';
-import {downloadTimeout, tmpDir} from './config.js';
 import {sendResponse} from './httpx.js';
-import {execWithTimeout, fetchAndExtractBundle, loadMeta, resolveTag} from "./load.js";
+import {loadMeta, resolveTag} from "./load.js";
 import {parsePath} from './parse.js';
 import {ll} from './util/logger.js';
-import path from 'path'
 
-export default async function (req, res) {
+export default async function (req: NowRequest, res: NowResponse) {
   const {method, url} = req;
   if (method !== 'GET') {
     res.status(404).json({code: 'not found'});
@@ -27,12 +24,7 @@ export default async function (req, res) {
   let respData = resolveTag(meta, fullname, tag, filepath);
   if (respData) return sendResponse(res, respData);
 
-  await downloadAndConvertPackage(meta, fullname, tag, filepath)
-
-  res.status(200).json({
-    namespace,
-    name: shortname,
-    tag,
-    filepath,
-  });
+  const data = await downloadAndConvertPackage(meta, fullname, tag, filepath);
+  res.status(200).write(data);
+  res.end()
 }

@@ -1,18 +1,21 @@
 /** @type {import('snowpack').SnowpackUserConfig } */
 module.exports = {
   mount: {
-    root: {
-      url: '/'
+    static: {
+      url: '/',
     },
-    src: {
+    'src/_': {
       url: '/_/',
     },
+  },
+  buildOptions: {
+    out: 'build.static',
   },
   plugins: [
     ['@snowpack/plugin-svelte'],
   ],
   packageOptions: {
     source: "remote",
-    origin: "http://localhost:6000"
-  }
+    origin: "http://localhost:6000",
+  },
 };

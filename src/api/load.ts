@@ -1,18 +1,17 @@
 import fs from 'fs';
 import mkdirp from 'mkdirp';
 import fetch from 'node-fetch';
-import path from 'path';
 import semver from 'semver/preload.js';
-import {pipeline} from 'stream';
+import {pipeline as _pipeline} from 'stream';
 import * as tar from 'tar';
-import util from 'util';
+import {promisify} from 'util';
 import {fetchJson, redirect, response, ResponseData} from './httpx.js';
 import {findVersion} from './parse.js';
 import type {RegistryPackageMeta} from "./types.js";
 import {ll} from './util/logger.js';
 
 const registry = 'https://registry.npmjs.org';
-const streamPipeline = util.promisify(pipeline);
+const pipeline = promisify(_pipeline);
 
 export async function loadMeta(fullname: string): Promise<RegistryPackageMeta> {
 
@@ -48,7 +47,7 @@ export async function fetchAndExtractBundle(fullname: string, tarUrl: string, di
   if (!resp.ok) throw new Error(`unexpected response ${resp.statusText}`);
 
   const outFile = `${dir}/package.tgz`;
-  await streamPipeline(resp.body, fs.createWriteStream(outFile));
+  await pipeline(resp.body, fs.createWriteStream(outFile));
   await tar.extract({file: outFile, cwd: dir});
 
   ll.debug('extracted', fullname, outFile, dir);

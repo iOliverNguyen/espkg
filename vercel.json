@@ -6,7 +6,7 @@
     },
     {
       "source": "/(.*)",
-      "destination": "/api/routes.ts"
+      "destination": "/api/api.js"
     }
   ]
 }

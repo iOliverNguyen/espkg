@@ -1,24 +1,24 @@
-import * as child_process from 'child_process';
+import {exec as _exec} from 'child_process';
 import * as esinstall from 'esinstall';
 import fs from 'fs/promises';
 import mkdirp from 'mkdirp';
 import path from 'path';
-import rimraf from 'rimraf';
-import * as util from 'util';
+import _rimraf from 'rimraf';
+import {promisify} from 'util';
 import {npmInstallEnvVars, rootDir, tmpDir} from './config.js';
-import type {ResponseData} from './httpx.js';
 import type {ConvertedPackage, ImportMap, RegistryPackageMeta} from './types.js';
 import {ll} from './util/logger.js';
 
-const exec = util.promisify(child_process.exec);
+const exec = promisify(_exec);
+const rimraf = promisify(_rimraf);
 
-export async function downloadAndConvertPackage(meta: RegistryPackageMeta, fullname: string, tag: string, filepath: string): Promise<ResponseData | ConvertedPackage> {
+export async function downloadAndConvertPackage(meta: RegistryPackageMeta, fullname: string, tag: string, filepath: string): Promise<ConvertedPackage> {
   const thisMeta = meta.versions[tag];
   const dist = thisMeta.dist;
-  // const tarUrl = dist.tarball;
-  // if (!tarUrl) {
-  //   return responseError(412, new Error('can not download package'));
-  // }
+  const tarUrl = dist.tarball;
+  if (!tarUrl) {
+    throw new Error('can not download package');
+  }
 
   // extract tar ball
   const outterDir = `${tmpDir}/${fullname}-${tag}-${dist.shasum}`;

@@ -2,7 +2,6 @@ import fs from 'fs';
 import mkdirp from 'mkdirp';
 import path from 'path';
 import rimraf from 'rimraf';
-import {fileURLToPath} from 'url';
 
 export const downloadTimeout = 3000;
 export const enableDebug = true;
@@ -34,7 +33,9 @@ function makeTmpDir(_dir) {
 }
 
 function findRootDir(): string {
-  let dir = path.resolve(path.dirname(fileURLToPath(import.meta.url)));
+  // module=esnext
+  // let dir = path.resolve(path.dirname(fileURLToPath(import.meta.url)));
+  let dir = __dirname; // target=es5
   while (dir !== '/') {
     try {
       const stat = fs.statSync(`${dir}/package.json`);

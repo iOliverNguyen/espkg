@@ -6,12 +6,10 @@
 .snowpack
 .vercel
 .vscode
-build
 coverage/
 dist/*
 lib/
 node_modules
-out/
 server/
 
 # OS generated files
