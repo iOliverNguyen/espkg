@@ -2,7 +2,7 @@ import compression from 'compression';
 import express from 'express';
 import favicon from 'serve-favicon';
 import {rootDir} from './api/config.js';
-import routes from './api/routes.js';
+// import routes from './api/routes.js';
 import {ll} from './util/logger.js';
 
 // const pkgInfo = require('../package.json');
@@ -126,7 +126,7 @@ app.use(
   }),
 );
 
-app.use(routes);
+// app.use(routes);
 
 // app.get('/', (req, res) => {
 //   res.status(200);

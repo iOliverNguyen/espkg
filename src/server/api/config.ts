@@ -39,8 +39,10 @@ function makeTmpDir(_dir) {
 
 function findRootDir(): string {
   // module=esnext
-  let dir = path.resolve(path.dirname(fileURLToPath(import.meta.url)));
-  // let dir = __dirname; // target=es5
+  // let dir = path.resolve(path.dirname(fileURLToPath(import.meta.url)));
+
+  // vercel does not support import yet, have to use es5
+  let dir = __dirname; // tsconfig.json: target=es5
   while (dir !== '/') {
     try {
       const stat = fs.statSync(`${dir}/package.json`);

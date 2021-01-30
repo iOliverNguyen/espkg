@@ -1,7 +1,6 @@
 {
   "name": "svelte-app",
   "version": "1.0.0",
-  "type": "module",
   "scripts": {
     "_build": "snowpack build",
     "_sp-dev": "snowpack dev",
@@ -49,6 +48,7 @@
     "node-fetch": "^2.6.1",
     "npm": "^6.14.11",
     "pretty-bytes": "^5.5.0",
+    "react": "^17.0.1",
     "sander": "^0.6.0",
     "semver": "^7.3.4",
     "serve-favicon": "^2.5.0",

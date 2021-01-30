@@ -98,7 +98,7 @@ async function sanitizePkg(cwd: string) {
 
 async function installDependencies(cwd: string) {
   const envVariables = npmInstallEnvVars.join(' ');
-  const installCommand = `${envVariables} node ${rootDir}/deps/y.js install`;
+  const installCommand = `${envVariables} node ${rootDir}/build.static/_/_y.js install`;
 
   const execRes = await exec(installCommand, {cwd});
   if (execRes.stdout) ll.debug(execRes.stdout);
