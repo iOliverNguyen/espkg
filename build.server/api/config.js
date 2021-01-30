@@ -8,14 +8,13 @@ var fs_1 = __importDefault(require("fs"));
 var mkdirp_1 = __importDefault(require("mkdirp"));
 var path_1 = __importDefault(require("path"));
 var rimraf_1 = __importDefault(require("rimraf"));
-require("url");
 exports.downloadTimeout = 3000;
 exports.enableDebug = true;
 exports.npmInstallEnvVars = [];
 exports.registry = 'https://registry.npmjs.org';
 exports.rootDir = findRootDir();
 exports.responseHeadersOk = {
-    'Cache-Control': 's-maxage=5184000, stale-while-revalidate'
+    'Cache-Control': 's-maxage=5184000, stale-while-revalidate',
 };
 var env = process.env;
 exports.tmpDir = env.TMP_DIR || '/tmp/windpack';
@@ -52,5 +51,6 @@ function findRootDir() {
             dir = path_1.default.dirname(dir);
         }
     }
+    console.log('-- rootDir', exports.rootDir);
 }
 //# sourceMappingURL=config.js.map

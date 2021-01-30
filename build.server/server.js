@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var compression_1 = __importDefault(require("compression"));
 var express_1 = __importDefault(require("express"));
 var serve_favicon_1 = __importDefault(require("serve-favicon"));
-var config_js_1 = require("./api/config.js");
-// import routes from './api/routes.js';
+// import {rootDir} from './api/config.js';
+var routes_js_1 = __importDefault(require("./api/routes.js"));
 var logger_js_1 = require("./util/logger.js");
 // const pkgInfo = require('../package.json');
 // const padRight = require('./utils/padRight.js');
@@ -15,9 +15,11 @@ var logger_js_1 = require("./util/logger.js");
 // const logger = require('./logger.js');
 // const cache = require('./cache.js');
 // const { debugEndpoints, root, tmpdir } = require('../config.js');
+var rootDir = '/var/task';
+// export default () => {
 var app = express_1.default();
 var port = process.env.PORT || 9000;
-app.use(serve_favicon_1.default(config_js_1.rootDir + "/static/favicon.ico"));
+app.use(serve_favicon_1.default(rootDir + "/static/favicon.ico"));
 app.use(compression_1.default());
 // if (debugEndpoints === true) {
 //   app.get('/_log', (req, res) => {
@@ -117,10 +119,10 @@ app.use(function (req, res, next) {
 //
 //   res.redirect(301, url);
 // });
-app.use(express_1.default.static(config_js_1.rootDir + "/build.static", {
+app.use(express_1.default.static(rootDir + "/build.static", {
     maxAge: 600,
 }));
-// app.use(routes);
+app.use(routes_js_1.default);
 // app.get('/', (req, res) => {
 //   res.status(200);
 //   res.end('hello!');
@@ -137,4 +139,5 @@ app.listen(port, function () {
     if (process.send)
         process.send('start');
 });
+// }
 //# sourceMappingURL=server.js.map

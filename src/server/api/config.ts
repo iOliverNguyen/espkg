@@ -2,7 +2,6 @@ import fs from 'fs';
 import mkdirp from 'mkdirp';
 import path from 'path';
 import rimraf from 'rimraf';
-import {fileURLToPath} from 'url';
 
 export const downloadTimeout = 3000;
 export const enableDebug = true;
@@ -11,7 +10,7 @@ export const registry = 'https://registry.npmjs.org';
 export const rootDir = findRootDir();
 
 export const responseHeadersOk = {
-  'Cache-Control': 's-maxage=5184000, stale-while-revalidate'
+  'Cache-Control': 's-maxage=5184000, stale-while-revalidate',
 };
 
 const env = process.env;
@@ -53,4 +52,6 @@ function findRootDir(): string {
       dir = path.dirname(dir);
     }
   }
+
+  console.log('-- rootDir', rootDir);
 }
