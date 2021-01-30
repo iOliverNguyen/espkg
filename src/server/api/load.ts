@@ -8,7 +8,7 @@ import {promisify} from 'util';
 import {fetchJson, redirect, response, ResponseData} from './httpx.js';
 import {findVersion} from './parse.js';
 import type {RegistryPackageMeta} from "./types.js";
-import {ll} from './util/logger.js';
+import {ll} from '../util/logger.js';
 
 const registry = 'https://registry.npmjs.org';
 const pipeline = promisify(_pipeline);

@@ -1,12 +1,18 @@
 {
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/--/(.*)",
-      "destination": "http://localhost:9000/$1"
+      "src": "./server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "handle": "filesystem"
     },
     {
-      "source": "/(.*)",
-      "destination": "/api/api.js"
+      "src": "/.*",
+      "dest": "server.js"
     }
   ]
 }

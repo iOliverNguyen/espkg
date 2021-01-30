@@ -7,7 +7,7 @@ import _rimraf from 'rimraf';
 import {promisify} from 'util';
 import {npmInstallEnvVars, rootDir, tmpDir} from './config.js';
 import type {ConvertedPackage, ImportMap, RegistryPackageMeta} from './types.js';
-import {ll} from './util/logger.js';
+import {ll} from '../util/logger.js';
 
 const exec = promisify(_exec);
 const rimraf = promisify(_rimraf);

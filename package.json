@@ -1,11 +1,12 @@
 {
   "name": "svelte-app",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "build": "snowpack build",
-    "sp-dev": "snowpack dev",
-    "start": "http-server build -p 3000",
-    "validate": "svelte-check"
+    "_build": "snowpack build",
+    "_sp-dev": "snowpack dev",
+    "start": "node server.js",
+    "_validate": "svelte-check"
   },
   "devDependencies": {
     "@jest/globals": "^26.6.2",
@@ -37,16 +38,20 @@
     "@types/node": "^14.14.22",
     "@types/node-fetch": "^2.5.8",
     "@types/tar": "^4.0.4",
+    "compression": "^1.7.4",
     "esinstall": "^1.0.3",
     "etag": "^1.8.1",
+    "express": "^4.17.1",
     "got": "^11.8.1",
     "jest": "^26.6.3",
     "minilog": "^3.1.0",
     "mkdirp": "^1.0.4",
     "node-fetch": "^2.6.1",
     "npm": "^6.14.11",
+    "pretty-bytes": "^5.5.0",
     "sander": "^0.6.0",
     "semver": "^7.3.4",
+    "serve-favicon": "^2.5.0",
     "sha1": "^1.1.1",
     "tar": "^6.1.0",
     "yarn": "^1.22.10"

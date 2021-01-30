@@ -16,7 +16,7 @@ import * as tar from 'tar';
 import { promisify } from 'util';
 import { fetchJson, redirect, response } from './httpx.js';
 import { findVersion } from './parse.js';
-import { ll } from './util/logger.js';
+import { ll } from '../util/logger.js';
 const registry = 'https://registry.npmjs.org';
 const pipeline = promisify(_pipeline);
 export function loadMeta(fullname) {

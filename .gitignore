@@ -9,7 +9,6 @@
 coverage/
 dist/*
 node_modules
-server/
 
 # OS generated files
 ._*

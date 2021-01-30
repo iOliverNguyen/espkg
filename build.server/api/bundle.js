@@ -15,7 +15,7 @@ import path from 'path';
 import _rimraf from 'rimraf';
 import { promisify } from 'util';
 import { npmInstallEnvVars, rootDir, tmpDir } from './config.js';
-import { ll } from './util/logger.js';
+import { ll } from '../util/logger.js';
 const exec = promisify(_exec);
 const rimraf = promisify(_rimraf);
 const fsReadFile = promisify(fs.readFile);
