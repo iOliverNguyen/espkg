@@ -9,8 +9,13 @@ export const npmInstallEnvVars = [];
 export const registry = 'https://registry.npmjs.org';
 export const rootDir = findRootDir();
 
+export const responseHeaderOrigin = {
+  'Access-Control-Allow-Origin': '*',
+};
+
 export const responseHeadersOk = {
   'Cache-Control': 's-maxage=5184000, stale-while-revalidate',
+  'Content-Type': 'text/javascript',
 };
 
 const env = process.env;

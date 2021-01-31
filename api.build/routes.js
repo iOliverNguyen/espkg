@@ -107,10 +107,11 @@ function debug(req, res) {
 exports.debug = debug;
 function serve(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var method, url, pp, fullname, tag, filepath, meta, respData, data, _i, _a, _b, header, value;
-        return __generator(this, function (_c) {
-            switch (_c.label) {
+        var method, url, pp, fullname, tag, filepath, meta, respData, data;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
+                    sendHeaders(res, config_js_1.responseHeaderOrigin);
                     method = req.method, url = req.url;
                     if (method !== 'GET') {
                         res.status(400).json({ msg: 'not found' });
@@ -126,18 +127,16 @@ function serve(req, res) {
                         tag = 'latest';
                     return [4 /*yield*/, load_js_1.loadMeta(fullname)];
                 case 1:
-                    meta = _c.sent();
+                    meta = _a.sent();
                     logger_js_1.ll.info("package: " + fullname);
                     respData = load_js_1.resolveTag(meta, fullname, tag, filepath);
-                    if (respData)
+                    if (respData) {
                         return [2 /*return*/, httpx_js_1.sendResponse(res, respData)];
+                    }
                     return [4 /*yield*/, bundle_js_1.downloadAndConvertPackage(meta, fullname, tag, filepath)];
                 case 2:
-                    data = _c.sent();
-                    for (_i = 0, _a = Object.entries(config_js_1.responseHeadersOk); _i < _a.length; _i++) {
-                        _b = _a[_i], header = _b[0], value = _b[1];
-                        res.setHeader(header, value);
-                    }
+                    data = _a.sent();
+                    sendHeaders(res, config_js_1.responseHeadersOk);
                     res.status(200).write(data.compiledData);
                     res.end();
                     logger_js_1.ll.info("package: " + fullname + " served");
@@ -147,4 +146,10 @@ function serve(req, res) {
     });
 }
 exports.serve = serve;
+function sendHeaders(res, headers) {
+    for (var _i = 0, _a = Object.entries(headers); _i < _a.length; _i++) {
+        var _b = _a[_i], header = _b[0], value = _b[1];
+        res.setHeader(header, value);
+    }
+}
 //# sourceMappingURL=routes.js.map

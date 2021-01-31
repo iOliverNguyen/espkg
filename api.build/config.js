@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.tmpDir = exports.responseHeadersOk = exports.rootDir = exports.registry = exports.npmInstallEnvVars = exports.enableDebug = exports.downloadTimeout = void 0;
+exports.tmpDir = exports.responseHeadersOk = exports.responseHeaderOrigin = exports.rootDir = exports.registry = exports.npmInstallEnvVars = exports.enableDebug = exports.downloadTimeout = void 0;
 var fs_1 = __importDefault(require("fs"));
 var mkdirp_1 = __importDefault(require("mkdirp"));
 var path_1 = __importDefault(require("path"));
@@ -13,8 +13,12 @@ exports.enableDebug = true;
 exports.npmInstallEnvVars = [];
 exports.registry = 'https://registry.npmjs.org';
 exports.rootDir = findRootDir();
+exports.responseHeaderOrigin = {
+    'Access-Control-Allow-Origin': '*',
+};
 exports.responseHeadersOk = {
     'Cache-Control': 's-maxage=5184000, stale-while-revalidate',
+    'Content-Type': 'text/javascript',
 };
 var env = process.env;
 exports.tmpDir = env.TMP_DIR || '/tmp/jspack';

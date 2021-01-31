@@ -2,7 +2,7 @@ import type {NowRequest, NowResponse} from '@vercel/node';
 import fs from 'fs';
 import path from 'path';
 import {downloadAndConvertPackage, readJsonFile} from './bundle.js';
-import {responseHeadersOk, rootDir} from './config.js';
+import {responseHeaderOrigin, responseHeadersOk, rootDir} from './config.js';
 import {errorContent, ResponseData, sendResponse} from './httpx.js';
 import {loadMeta, resolveTag} from "./load.js";
 import {parsePath} from './parse.js';
@@ -52,6 +52,8 @@ export async function debug(req: NowRequest, res: NowResponse) {
 }
 
 export async function serve(req: NowRequest, res: NowResponse) {
+  sendHeaders(res, responseHeaderOrigin);
+
   const {method, url} = req;
   if (method !== 'GET') {
     res.status(400).json({msg: 'not found'});
@@ -69,14 +71,20 @@ export async function serve(req: NowRequest, res: NowResponse) {
   ll.info(`package: ${fullname}`);
 
   let respData = resolveTag(meta, fullname, tag, filepath);
-  if (respData) return sendResponse(res, respData as ResponseData);
+  if (respData) {
+    return sendResponse(res, respData as ResponseData);
+  }
 
   const data = await downloadAndConvertPackage(meta, fullname, tag, filepath);
 
-  for (let [header, value] of Object.entries(responseHeadersOk)) {
-    res.setHeader(header, value);
-  }
+  sendHeaders(res, responseHeadersOk);
   res.status(200).write(data.compiledData);
   res.end();
   ll.info(`package: ${fullname} served`);
+}
+
+function sendHeaders(res: NowResponse, headers: Record<string, string>) {
+  for (let [header, value] of Object.entries(headers)) {
+    res.setHeader(header, value);
+  }
 }
