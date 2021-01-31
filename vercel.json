@@ -1,19 +1,13 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "./server.js",
-      "use": "@vercel/node"
-    },
-    { "src": "*.html", "use": "@vercel/static" }
-  ],
-  "routes": [
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/.*",
-      "dest": "server.js"
+      "source": "/(.*)",
+      "destination": "/api/api.js"
     }
-  ]
+  ],
+  "functions": {
+    "api/api.js": {
+      "includeFiles": "deps/*"
+    }
+  }
 }

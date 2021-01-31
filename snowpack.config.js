@@ -9,7 +9,7 @@ module.exports = {
     },
   },
   buildOptions: {
-    out: 'build.static',
+    out: 'public',
   },
   plugins: [
     ['@snowpack/plugin-svelte'],

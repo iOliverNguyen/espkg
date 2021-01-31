@@ -1,7 +1,7 @@
 {
   //   "extends": "@tsconfig/svelte/tsconfig.json",
   "compilerOptions": {
-    "outDir": "build.server",
+    "outDir": "api.build",
     "moduleResolution": "node",
     // for import.meta.url
     // "module": "esnext",
@@ -31,11 +31,10 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": [
-    "src/server"
+    "src.api/*"
   ],
   "exclude": [
     "node_modules/*",
-    "__sapper__/*",
     "public/*"
   ]
 }
