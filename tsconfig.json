@@ -9,7 +9,7 @@
 
     // vercel does not support import yet, have to use es5
     // Must use import to load ES Module: /var/task/___vc_launcher.js\nrequire() of ES modules is not supported.
-    "target": "es5",
+    "target": "es6",
     /**
       Svelte Preprocess cannot figure out whether you have a value or a type, so tell TypeScript
       to enforce using `import type` instead of `import` for Types.

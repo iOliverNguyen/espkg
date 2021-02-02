@@ -1,10 +1,10 @@
 /** @type {import('snowpack').SnowpackUserConfig } */
 module.exports = {
   mount: {
-    static: {
+    'src.public': {
       url: '/',
     },
-    'src/_': {
+    'src.app/_': {
       url: '/_/',
     },
   },

@@ -33,6 +33,20 @@ function element(name) {
 function text(data) {
     return document.createTextNode(data);
 }
+function space() {
+    return text(' ');
+}
+function listen(node, event, handler, options) {
+    node.addEventListener(event, handler, options);
+    return () => node.removeEventListener(event, handler, options);
+}
+function prevent_default(fn) {
+    return function (event) {
+        event.preventDefault();
+        // @ts-ignore
+        return fn.call(this, event);
+    };
+}
 function attr(node, attribute, value) {
     if (value == null)
         node.removeAttribute(attribute);
@@ -42,10 +56,8 @@ function attr(node, attribute, value) {
 function children(element) {
     return Array.from(element.childNodes);
 }
-function set_data(text, data) {
-    data = '' + data;
-    if (text.wholeText !== data)
-        text.data = data;
+function set_input_value(input, value) {
+    input.value = value == null ? '' : value;
 }
 
 let current_component;
@@ -245,4 +257,4 @@ class SvelteComponent {
     }
 }
 
-export { SvelteComponent, append, attr, detach, element, init, insert, noop, safe_not_equal, set_data, text };
+export { SvelteComponent, append, attr, detach, element, init, insert, listen, noop, prevent_default, run_all, safe_not_equal, set_input_value, space, text };
