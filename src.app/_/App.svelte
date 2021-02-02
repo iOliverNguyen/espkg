@@ -9,11 +9,13 @@
     <div class="note">(please wait a little bit for transpiling, then the result will be cached by Vercel)</div>
   </form>
   <div class="examples">
-    <a target="_blank" href="/moment">https://espkg.vercel.app/moment</a><br>
-    <a target="_blank" href="/react@16">https://espkg.vercel.app/react@16</a><br>
-    <a target="_blank" href="/minimatch@3.0.4">https://espkg.vercel.app/minimatch@3.0.4</a><br>
     <a target="_blank" href="/uuid">https://espkg.vercel.app/uuid</a><br>
-    <a target="_blank" href="/left-pad">https://espkg.vercel.app/left-pad</a>
+    <a target="_blank" href="/left-pad">https://espkg.vercel.app/left-pad</a><br>
+    <a target="_blank" href="/react@16">https://espkg.vercel.app/react@16</a><br>
+    <a target="_blank" href="/moment@2.20">https://espkg.vercel.app/moment@2.20</a><br>
+    <a target="_blank" href="/minimatch@3.0.4">https://espkg.vercel.app/minimatch@3.0.4</a><br>
+    <div class="note">Powered by <a href="https://github.com/snowpackjs/snowpack/tree/main/esinstall" target="_blank">esinstall</a>
+      from <a href="https://snowpack.dev" target="_blank">Snowpack</a>. Site created by <a href="https://twitter.com/olvrng" target="_blank">olvrng</a>.</div>
   </div>
 </main>
 
@@ -50,6 +52,7 @@
   .note {
     color: #7e7e7e;
     font-size: 0.8em;
+    margin-top: 1em;
   }
 
   input.main {
@@ -77,10 +80,10 @@
 
   .examples {
     left: 50%;
-    margin-left: -10em;
+    margin-left: -12em;
     text-align: left;
     position: absolute;
-    bottom: 2em;
+    bottom: 1em;
     line-height: 1.5em;
     font-size: 1em;
 

@@ -33,7 +33,7 @@ function create_fragment(ctx) {
 	let t6;
 	let div1;
 	let t8;
-	let div2;
+	let div3;
 	let mounted;
 	let dispose;
 
@@ -56,23 +56,25 @@ function create_fragment(ctx) {
 			div1 = element("div");
 			div1.textContent = "(please wait a little bit for transpiling, then the result will be cached by Vercel)";
 			t8 = space();
-			div2 = element("div");
+			div3 = element("div");
 
-			div2.innerHTML = `<a target="_blank" href="/moment" class="svelte-zytmjl">https://espkg.vercel.app/moment</a><br/> 
-    <a target="_blank" href="/react@16" class="svelte-zytmjl">https://espkg.vercel.app/react@16</a><br/> 
-    <a target="_blank" href="/minimatch@3.0.4" class="svelte-zytmjl">https://espkg.vercel.app/minimatch@3.0.4</a><br/> 
-    <a target="_blank" href="/uuid" class="svelte-zytmjl">https://espkg.vercel.app/uuid</a><br/> 
-    <a target="_blank" href="/left-pad" class="svelte-zytmjl">https://espkg.vercel.app/left-pad</a>`;
+			div3.innerHTML = `<a target="_blank" href="/uuid" class="svelte-1fm77nk">https://espkg.vercel.app/uuid</a><br/> 
+    <a target="_blank" href="/left-pad" class="svelte-1fm77nk">https://espkg.vercel.app/left-pad</a><br/> 
+    <a target="_blank" href="/react@16" class="svelte-1fm77nk">https://espkg.vercel.app/react@16</a><br/> 
+    <a target="_blank" href="/moment@2.20" class="svelte-1fm77nk">https://espkg.vercel.app/moment@2.20</a><br/> 
+    <a target="_blank" href="/minimatch@3.0.4" class="svelte-1fm77nk">https://espkg.vercel.app/minimatch@3.0.4</a><br/> 
+    <div class="note svelte-1fm77nk">Powered by <a href="https://github.com/snowpackjs/snowpack/tree/main/esinstall" target="_blank" class="svelte-1fm77nk">esinstall</a>
+      from <a href="https://snowpack.dev" target="_blank" class="svelte-1fm77nk">Snowpack</a>. Site created by <a href="https://twitter.com/olvrng" target="_blank" class="svelte-1fm77nk">olvrng</a>.</div>`;
 
-			attr(h1, "class", "svelte-zytmjl");
-			attr(input, "class", "main svelte-zytmjl");
+			attr(h1, "class", "svelte-1fm77nk");
+			attr(input, "class", "main svelte-1fm77nk");
 			attr(input, "type", "text");
 			attr(input, "placeholder", /*defText*/ ctx[1]);
-			attr(button, "class", "svelte-zytmjl");
-			attr(div0, "class", "pkg svelte-zytmjl");
-			attr(div1, "class", "note svelte-zytmjl");
-			attr(div2, "class", "examples svelte-zytmjl");
-			attr(main, "class", "svelte-zytmjl");
+			attr(button, "class", "svelte-1fm77nk");
+			attr(div0, "class", "pkg svelte-1fm77nk");
+			attr(div1, "class", "note svelte-1fm77nk");
+			attr(div3, "class", "examples svelte-1fm77nk");
+			attr(main, "class", "svelte-1fm77nk");
 		},
 		m(target, anchor) {
 			insert(target, main, anchor);
@@ -90,7 +92,7 @@ function create_fragment(ctx) {
 			append(form, t6);
 			append(form, div1);
 			append(main, t8);
-			append(main, div2);
+			append(main, div3);
 
 			if (!mounted) {
 				dispose = [
