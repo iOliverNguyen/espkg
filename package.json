@@ -4,7 +4,6 @@
   "scripts": {
     "_build": "snowpack build",
     "_sp-dev": "snowpack dev",
-    "start": "node server.js",
     "_validate": "svelte-check"
   },
   "devDependencies": {
